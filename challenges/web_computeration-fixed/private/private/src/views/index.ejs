@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Computeration</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Computeration</h1>
+        <h2>My Notes</h2>
+        <div id="notesDiv"></div>
+        <br>
+        <button onclick="clearNotes()">Clear notes</button>
+        <h2>Search</h2>
+        Search in my notes <input id="searchNoteInp"></input>
+        <button onclick="searchNote()">OK</button>
+        <div id="notesFound"></div>
+        <script>
+            let notes = JSON.parse(localStorage.getItem('notes')) || [];
+            function clearNotes(){
+                notes = [];
+                localStorage.setItem('notes', '[]');
+                notesDiv.innerHTML = '';
+                notesFound.innerHTML='';
+            }
+            function insertNote(title, content){
+                notesDiv.innerHTML += `<details><summary>${title}</summary><p>${content}</p>`
+            }
+            for(let note of notes){
+                insertNote(note.title, note.content);
+            }
+
+            function searchNote(){
+                location.hash = searchNoteInp.value;
+            }
+
+            onhashchange = () => {
+                const reg = new RegExp(decodeURIComponent(location.hash.slice(1)));
+                const found = [];
+                notes.forEach(e=>{
+                    if(e.content.search(reg) !== -1){
+                        found.push(e.title);
+                    }
+                });
+
+                notesFound.innerHTML = found;
+            }
+
+            function addNote(){
+                const title = newNoteTitle.value;
+                const content = newNoteContent.value;
+                insertNote(title,content);
+                notes.push({title, content});
+                localStorage.setItem('notes', JSON.stringify(notes));
+                newNoteTitle.value = '';
+                newNoteContent.value = '';
+            }
+        </script>
+
+        <h2>New Note</h2>
+        Title: <input id="newNoteTitle"/> <br>
+        Content: <textarea id="newNoteContent"></textarea> <br>
+        <button onclick="addNote()">Add</button>
+    </body>
+</html>

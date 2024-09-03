@@ -1,0 +1,11 @@
+{
+    "identifier": "misc-sanity-check",
+    "name": "Sanity Check",
+    "description": "https://www.youtube.com/watch?v=CM3jcGsS0Po :)",
+    "description_files": [],
+    "category": "misc",
+    "difficulty": "easy",
+    "flag": "justCTF{something_h3re!}",
+    "files": [],
+    "version": 0
+}

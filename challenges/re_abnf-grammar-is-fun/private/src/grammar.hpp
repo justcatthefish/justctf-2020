@@ -1,0 +1,17 @@
+struct start : tao::pegtl::istring< 'j', 'u', 's', 't', 'C', 'T', 'F', '{' > {};
+struct end : tao::pegtl::one< '}' > {};
+struct prefix;
+struct infix;
+struct sufix;
+struct flag : tao::pegtl::sor< tao::pegtl::istring< 'A', 's', 'i', 'a' >, tao::pegtl::seq< start, tao::pegtl::seq< prefix, tao::pegtl::one< '_' >, infix, tao::pegtl::one< '_' >, sufix >, end > > {};
+struct prefix : tao::pegtl::seq< tao::pegtl::plus< tao::pegtl::istring< 'a' > >, tao::pegtl::rep_max< 2, tao::pegtl::istring< 'b' > >, tao::pegtl::sor< tao::pegtl::istring< 'l', 'e', 'f', 't' >, tao::pegtl::istring< 'r', 'i', 'g', 'h', 't' >, tao::pegtl::istring< 's', 'o', 'm', 'e', 't', 'h', 'i', 'n', 'g', '_', 'e', 'l', 's', 'e' > > > {};
+struct infix : tao::pegtl::seq< tao::pegtl::sor< tao::pegtl::istring< 's', 'h', 'o', 'r', 't' >, tao::pegtl::istring< 'l', 'o', 'n', 'g' > >, tao::pegtl::star< tao::pegtl::sor< tao::pegtl::istring< 'c' >, tao::pegtl::istring< 'd', 'd' > > >, tao::pegtl::plus< DIGIT > > {};
+struct Q;
+struct sufix : tao::pegtl::seq< tao::pegtl::sor< tao::pegtl::istring< 's', 'i', 'm', 'p', 'l', 'e' >, tao::pegtl::istring< 'h', 'a', 'r', 'd' > >, tao::pegtl::one< '-' >, Q > {};
+struct L;
+struct M;
+struct R;
+struct Q : tao::pegtl::seq< L, M, R, tao::pegtl::rep< 4, tao::pegtl::istring< 'x', 'o', 'x', 'o' > > > {};
+struct L : tao::pegtl::rep_max< 3, tao::pegtl::istring< 'W', 'R', 'C' > > {};
+struct M : tao::pegtl::rep_max< 7, tao::pegtl::sor< tao::pegtl::istring< 'Q', 'S', 'P' >, tao::pegtl::istring< 'W', 'S', 'P' > > > {};
+struct R : tao::pegtl::sor< tao::pegtl::star< tao::pegtl::istring< 'C', 'W', 'R' > >, tao::pegtl::istring< 'W', 'C', 'R' > > {};

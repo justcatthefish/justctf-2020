@@ -1,0 +1,8 @@
+{
+    "identifier": "pwn-mylittlepwny",
+    "name": "MyLittlePwny",
+    "description_files": [],
+    "category": ["pwn", "misc"],
+    "difficulty": "easy",
+    "version": 0
+}

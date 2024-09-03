@@ -1,0 +1,1 @@
+justCTF{cross_origin_timing_lol}

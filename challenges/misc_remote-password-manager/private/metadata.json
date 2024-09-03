@@ -1,0 +1,10 @@
+{
+    "identifier": "fore-remote-password-manager",
+    "name": "Remote Password Manager",
+    "description": "I just have the safest password manager. Even if you gonna steal my laptop, you won't be able to get my secrets.",
+    "description_files": [],
+    "category": ["fore", "misc"],
+    "difficulty": "easy",
+    "flag": "justCTF{7h3r3_15_n0_5uch_7h1n6_45_unh4ck4bl3}",
+    "version": 1
+}

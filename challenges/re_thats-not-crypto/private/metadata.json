@@ -1,0 +1,8 @@
+{
+    "identifier": "re-thats-not-crypto",
+    "name": "That's not crypto",
+    "category": "re",
+    "difficulty": "easy",
+    "flag": "justCTF{this_is_very_simple_flag_afer_so_big_polynomails}",
+    "version": 0
+}

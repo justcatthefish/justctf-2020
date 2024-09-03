@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - caddy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # this volume is needed to keep the certificates
+      # otherwise, new ones will be re-issued upon restart
+      - caddy_data:/data
+    labels: # Global options
+      caddy.email: justcatthefish@gmail.com
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"
+
+  bot:
+    build: ./bot_worker/
+    restart: unless-stopped
+    networks:
+      - caddy
+    cap_drop:
+      - all
+    cap_add:
+      - NET_BIND_SERVICE  # bind
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"
+
+  web:
+    build:
+      context: ./private/
+    restart: unless-stopped
+    # ports:
+    #   - 127.0.0.1:10001:8080
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"
+    networks:
+      - caddy
+    labels:
+      caddy: computeration-fixed.web.jctf.pro
+      caddy.reverse_proxy: "{{upstreams 8080}}"
+      # remove the following line when you have verified your setup
+      # Otherwise you risk being rate limited by let's encrypt
+      # caddy.tls.ca: https://acme-staging-v02.api.letsencrypt.org/directory
+
+networks:
+  caddy:
+
+volumes:
+  caddy_data: {}

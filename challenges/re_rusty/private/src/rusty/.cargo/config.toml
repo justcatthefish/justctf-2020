@@ -1,0 +1,5 @@
+[build]
+target="x86_64-pc-windows-msvc"
+
+[target.x86_64-pc-windows-msvc]
+linker = "c:\\sources\\github\\justCTF2020\\challenges\\re_rusty\\src\\MyLinker\\MyLinker\\bin\\MyLinker.exe"

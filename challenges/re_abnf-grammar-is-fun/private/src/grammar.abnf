@@ -1,0 +1,16 @@
+start = "justCTF{"
+end = "}"
+
+flag = "Asia" / ( start (prefix "_" infix "_" sufix) end )
+
+prefix = (1*"a") (*2"b") ("left" / "right" / "something_else")
+
+infix = ("short" / "long") *("c" / "dd") 1*DIGIT
+sufix = ("simple"/"hard") "-" Q
+
+Q = L M R 4"xoxo"
+
+L = 0*3"WRC"
+M = 0*7("QSP" / "WSP")
+R = (*"CWR") / ("WCR")
+

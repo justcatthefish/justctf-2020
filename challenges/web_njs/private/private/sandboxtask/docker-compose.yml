@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  njs:
+    build: ..
+    container_name: njs
+    restart: unless-stopped
+    ports:
+    - 80:80
+#    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"

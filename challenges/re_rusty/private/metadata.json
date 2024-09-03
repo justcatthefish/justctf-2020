@@ -1,0 +1,9 @@
+{
+    "identifier": "re-rusty",
+    "name": "Rusty",
+    "description": "Looking at Rust code in disassembler/decompiler hurts, so... look somewhere else.",
+    "category": "re",
+    "difficulty": "easy",
+    "flag": "justCTF{just_a_rusty_old_DOS_stub_task}",
+    "version": 0
+}

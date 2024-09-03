@@ -1,0 +1,9 @@
+{
+    "identifier": "pwn-docker",
+    "name": "D0cker",
+    "description_files": [],
+    "category": ["pwn", "misc"],
+    "difficulty": "medium",
+    "servers": [],
+    "version": 2
+}

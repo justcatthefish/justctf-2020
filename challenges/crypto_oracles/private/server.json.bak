@@ -1,0 +1,78 @@
+{
+    "servers": [
+        {
+            "size": "s-1vcpu-1gb",
+            "image": "77740895",
+            "region": "ams3",
+            "domains": [
+                "oracles.web.jctf.pro"
+            ],
+            "lb_connections": [
+                {
+                    "from": "oracles.web.jctf.pro",
+                    "type": "http",
+                    "to": "127.0.0.1:8080"
+                }
+            ],
+            "firewall": {
+                "inbound_rules": [
+                    {
+                        "protocol": "tcp",
+                        "ports": "80",
+                        "addresses": [
+                            "0.0.0.0/0",
+                            "::/0"
+                        ]
+                    }
+                ],
+                "outbound_rules": [
+                    {
+                        "protocol": "tcp",
+                        "ports": "all",
+                        "addresses": [
+                            "0.0.0.0/0",
+                            "::/0"
+                        ]
+                    },
+                    {
+                        "protocol": "udp",
+                        "ports": "all",
+                        "addresses": [
+                            "0.0.0.0/0",
+                            "::/0"
+                        ]
+                    }
+                ]
+            },
+            "monitoring": {
+                "metrics": [
+                    {
+                        "name": "healthcheck-http_2xx",
+                        "module": "http_2xx",
+                        "interval": "10s",
+                        "targets": [
+                            "http://oracles.web.jctf.pro"
+                        ]
+                    },
+                    {
+                        "name": "healthcheck-tcp",
+                        "module": "tcp_connect",
+                        "interval": "10s",
+                        "targets": [
+                            "oracles.web.jctf.pro:80"
+                        ]
+                    },
+                    {
+                        "name": "metrics",
+                        "module": "host",
+                        "interval": "10s",
+                        "targets": [
+                            "oracles.web.jctf.pro:9100",
+                            "oracles.web.jctf.pro:9101"
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+version: '2.4'
+
+services:
+  server:
+    build: .
+    restart: "unless-stopped"
+    ports:
+      - 1337:1337
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"

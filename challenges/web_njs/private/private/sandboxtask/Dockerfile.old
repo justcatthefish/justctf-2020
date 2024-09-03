@@ -1,0 +1,61 @@
+FROM nginx:alpine AS builder
+
+# nginx:alpine contains NGINX_VERSION environment variable, like so:
+# ENV NGINX_VERSION 1.15.0
+
+# For latest build deps, see https://github.com/nginxinc/docker-nginx/blob/master/mainline/alpine/Dockerfile
+RUN apk add --no-cache --virtual .build-deps \
+  gcc \
+  libc-dev \
+  make \
+  openssl-dev \
+  pcre-dev \
+  zlib-dev \
+  linux-headers \
+  curl \
+  gnupg \
+  libxslt-dev \
+  gd-dev \
+  mercurial \
+  git \
+  geoip-dev \
+  gdb
+
+# Download sources
+RUN cd /tmp && \
+    wget "http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz" -O nginx.tar.gz && \
+    tar -zxC /tmp -f nginx.tar.gz
+
+# Download njs
+RUN cd /tmp && \
+    git clone https://github.com/nginx/njs && \
+    cd njs && \
+    git reset --hard 0.4.4 && \
+    sed -i 's/{CFLAGS=}/{CFLAGS=-ggdb}/g' configure
+
+# Reuse same cli arguments as the nginx:alpine image used to build
+RUN CONFARGS=$(nginx -V 2>&1 | sed -n -e 's/^.*arguments: //p') \
+    cd /tmp && \
+    MODULEDIR="$(pwd)/njs/nginx" && \
+    cd /tmp/nginx-$NGINX_VERSION && \
+    ./configure --with-compat $CONFARGS --add-dynamic-module=$MODULEDIR && \
+    make && make install
+
+RUN ls -al /usr/local/nginx/modules/
+
+#FROM nginx:alpine
+#RUN apk add iproute2
+##RUN apk add vim
+##RUN apk add gdb
+#
+## Extract the dynamic module from the builder image
+##RUN rm -Rf -- /etc/nginx/modules/
+#COPY --from=builder /usr/local/nginx/modules/ /etc/nginx/modules/
+#
+#COPY ./server.js /etc/nginx/server.js
+#COPY ./nginx.conf /etc/nginx/nginx.conf
+#COPY ./run.sh /run.sh
+#COPY ./flag.txt /flag.txt
+#RUN chmod +x /run.sh
+#
+#CMD ["/run.sh"]

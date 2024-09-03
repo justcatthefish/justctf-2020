@@ -1,0 +1,8 @@
+{
+    "identifier": "stegano-steganography-20",
+    "name": "Steganography 2.0",
+    "category": ["misc", "stegano", "ppc"],
+    "difficulty": "medium",
+    "flag": "justCTF{17#K?}",
+    "version": 0
+}

@@ -1,0 +1,6 @@
+{
+    "identifier": "misc-painterhell",
+    "category": ["misc", "web", "re", "pwn"],
+    "difficulty": "hard",
+    "version": 5
+}

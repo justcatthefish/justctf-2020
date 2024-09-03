@@ -1,0 +1,19 @@
+FROM i386/ubuntu:16.04
+
+RUN apt-get update -y && apt-get install -y wget
+RUN apt-get install -y unzip
+
+WORKDIR /code
+RUN wget -O - https://mms.alliedmods.net/mmsdrop/1.10/mmsource-1.10.7-git970-linux.tar.gz | tar -C . -xvz
+RUN wget -O - http://sourcemod.otstrel.ru/sourcemod-1.6.3-linux.tar.gz | tar -C . -xvz
+# RUN wget -O - https://sm.alliedmods.net/smdrop/1.9/sourcemod-1.9.0-git6281-linux.tar.gz | tar -C . -xvz
+
+RUN wget -O tmp.zip http://forums.alliedmods.net/attachment.php?attachmentid=83286 && unzip tmp.zip && rm tmp.zip
+RUN wget -O tmp.zip https://builds.limetech.io/files/tf2items-1.6.4-hg279-linux.zip && unzip tmp.zip && rm tmp.zip
+RUN wget -O addons/sourcemod/gamedata/tf2.attributes.txt https://raw.githubusercontent.com/FlaminSarge/tf2attributes/master/tf2.attributes.txt
+RUN rm addons/sourcemod/plugins/*.smx
+
+# install plugins+configs
+ADD . addons/sourcemod/scripting
+
+RUN cd /code/addons/sourcemod/scripting && ./spcomp efekty_new.sp

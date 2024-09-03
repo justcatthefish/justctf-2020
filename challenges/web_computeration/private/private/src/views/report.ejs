@@ -1,0 +1,14 @@
+<h1>Report issue to admin</h1>
+<script src='https://www.google.com/recaptcha/api.js?hl=en'></script>
+<script>
+    function submit(){form.submit()}
+</script>
+<form id="form" action="/report" method="POST">
+    URL: <input name="url" />
+    <button 
+        class="g-recaptcha" 
+        data-sitekey="CAPTCHA_PUBLIC"
+        data-callback="submit"
+        data-action="submit"
+    >Report</button>
+</form>

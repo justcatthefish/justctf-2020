@@ -1,0 +1,44 @@
+version: '2.4'
+
+services:
+  manager:
+    build:
+      context: ./manager
+    restart: "unless-stopped"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./sandboxtask/:/sandboxtask/
+    ports:
+      - 80:80
+    cap_drop:
+      - all
+    cap_add:
+      - SETGID  # su
+      - SETUID  # su
+      - AUDIT_WRITE  # su
+      - NET_BIND_SERVICE  # nginx / bind
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"
+
+  # only for build image ;)
+  sandboxtask1:
+    build:
+      context: ./sandboxtask/server
+    image: sandboxtask1
+    restart: "no"
+    command: /bin/bash -c 'echo 1;'
+  sandboxtask2:
+    build:
+      context: ./sandboxtask/mysql
+    image: sandboxtask2
+    restart: "no"
+    command: /bin/bash -c 'echo 1;'
+  sandboxtask3:
+    build:
+      context: ./sandboxtask/web
+    image: sandboxtask3
+    restart: "no"
+    command: /bin/bash -c 'echo 1;'

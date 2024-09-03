@@ -1,0 +1,7 @@
+{
+    "identifier": "pwn-qmail",
+    "name": "qmail",
+    "category": "pwn",
+    "difficulty": "easy",
+    "version": 1
+}

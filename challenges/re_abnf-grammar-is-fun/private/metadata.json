@@ -1,0 +1,8 @@
+{
+    "identifier": "re-abnf-grammar-is-fun",
+    "name": "ABNF: grammar is fun",
+    "category": "re",
+    "difficulty": "medium",
+    "flag": "justCTF{aleft_long0_hard-xoxoxoxoxoxoxoxo}",
+    "version": 0
+}

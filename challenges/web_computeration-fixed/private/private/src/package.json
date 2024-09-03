@@ -1,0 +1,18 @@
+{
+    "name": "docker_web_computeration",
+    "version": "1.3.7",
+    "description": "Computeration challenge",
+    "author": "terjanq <terjanq@gmail.com>",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "ejs": "^3.1.5",
+      "node-fetch": "^2.6.1",
+      "express-recaptcha": "^5.0.2"
+    },
+    "devDependencies": {},
+    "license": "ISC"
+  }

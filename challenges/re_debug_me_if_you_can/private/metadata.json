@@ -1,0 +1,14 @@
+{
+    "identifier": "re_debug_me_if_you_can",
+    "name": "debug_me_if_you_can",
+    "description": "I bet you can't crack this binary protected with my custom bl33d1ng edg3 pr0t3c70r!!!111oneoneone",
+    "description_files": [
+        
+    ],
+    "category": "re",
+    "difficulty": "medium",
+    "flag": [
+        "justCTF{Cr4ckm3s_are_0xCCiting}"
+    ],
+    "version": 0
+}

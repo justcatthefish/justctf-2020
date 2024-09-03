@@ -1,0 +1,1 @@
+justCTF{"This bug seems to be not exploitable, at least not with a sane filesystem implementation.": yet, here you are!}

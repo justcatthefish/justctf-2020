@@ -1,0 +1,25 @@
+version: '2.2'
+
+services:
+  docker:
+    build:
+      context: ./
+    restart: "unless-stopped"
+    ports:
+      - 1337:1337
+    cap_drop:
+      - all
+    cap_add:
+      - CAP_DAC_OVERRIDE
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/pwn-docker/:/tmp/pwn-docker/
+      - /var/lib/docker/overlay2/:/overlayz/
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "30m"
+        max-file: "5"
+
